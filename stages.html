@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как идёт проект: 30 стадий — Инженерная студия Дмитрия Клевцова</title>
+<link rel="canonical" href="https://klevtsov-engineering.ru/stages.html">
+<meta name="description" content="Полная структура инженерного проекта: от брифа и патентной проверки до КД, изготовления, пусконаладки и гарантийного сопровождения. Что делаем сами, что организуем через партнёров.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0E0F11; --bg-2:#131517; --bg-3:#191C1F; --steel:#22262B; --steel-2:#31363D;
+  --fg:#E9ECEF; --fg-2:#A4A7AA; --muted:#6E757E; --hot:#FF6500; --hot-soft:rgba(255,101,0,.14);
+  --cold:#7FB2D9; --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.045);
+  --mono:"IBM Plex Mono", ui-monospace, monospace; --sans:"Onest", Arial, sans-serif; --r:2px;
+  --shell:min(1180px, 100% - 44px);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0; background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:16px; line-height:1.55;
+  letter-spacing:-.01em; -webkit-font-smoothing:antialiased}
+a{color:inherit; text-decoration:none}
+.shell{width:var(--shell); margin-inline:auto}
+.mono{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; font-weight:500}
+h1,h2,h3{margin:0; font-weight:700; letter-spacing:-.035em; line-height:1.05}
+
+header{border-bottom:1px solid var(--line); padding:20px 0; position:sticky; top:0; z-index:20;
+  background:rgba(14,15,17,.9); backdrop-filter:blur(12px)}
+.head-in{display:flex; align-items:center; gap:20px; justify-content:space-between}
+.back{display:inline-flex; align-items:center; gap:10px; color:var(--fg-2); font-size:14px}
+.back:hover{color:var(--fg)}
+.btn{display:inline-flex; align-items:center; gap:10px; height:40px; padding:0 16px; border:1px solid var(--hot);
+  background:var(--hot); color:#0E0F11; font-size:14px; font-weight:600; border-radius:var(--r)}
+.btn:hover{background:#ff7a26}
+
+.intro{padding:clamp(48px,7vw,96px) 0 clamp(30px,4vw,52px)}
+.kicker{display:flex; align-items:center; gap:12px; color:var(--muted); margin-bottom:20px}
+.kicker .idx{color:var(--hot)} .kicker .bar{flex:1; height:1px; background:var(--line); max-width:110px}
+h1{font-size:clamp(32px,5vw,62px); font-weight:800; max-width:18ch}
+.lead{font-size:clamp(16px,1.5vw,20px); color:var(--fg-2); max-width:66ch; margin-top:22px; line-height:1.5}
+.legend{display:flex; flex-wrap:wrap; gap:10px; margin-top:30px}
+.lg{display:inline-flex; align-items:center; gap:9px; border:1px solid var(--line); padding:8px 13px; font-size:13.5px; color:var(--fg-2)}
+.dot{width:8px; height:8px; flex:none; border-radius:50%}
+.d-own{background:var(--hot)} .d-partner{background:var(--cold)} .d-doc{background:#9AA3AB} .d-big{background:transparent; border:1px solid var(--muted)}
+
+.gate{display:grid; grid-template-columns:auto minmax(0,1fr); gap:18px; align-items:center;
+  border:1px solid var(--hot); border-left-width:2px; background:linear-gradient(90deg, var(--hot-soft), transparent 60%);
+  padding:16px 20px; margin:26px 0}
+.gate b{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--hot)}
+.gate span{font-size:15px; color:var(--fg)}
+
+.phase{border-top:1px solid var(--line); padding-top:26px; margin-top:clamp(40px,5vw,70px)}
+.phase-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(16px,3vw,48px); align-items:end; margin-bottom:26px}
+.phase-head h2{font-size:clamp(22px,2.6vw,34px)}
+.phase-head p{margin:0; color:var(--muted); font-size:15px}
+.stages{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line)}
+.stage{background:var(--bg); padding:20px 22px 22px; display:flex; flex-direction:column; gap:9px; position:relative; transition:background .25s}
+.stage:hover{background:var(--bg-2)}
+.stage .top{display:flex; align-items:baseline; gap:12px}
+.stage .n{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.1em}
+.stage h3{font-size:17px; font-weight:600; letter-spacing:-.025em; line-height:1.2}
+.stage .focus{font-size:14.5px; color:var(--fg-2); line-height:1.5}
+.stage .out{font-size:13.5px; color:var(--muted); border-top:1px solid var(--line-2); padding-top:10px; margin-top:auto}
+.stage .out b{color:var(--fg-2); font-weight:500}
+.stage .mark{position:absolute; right:16px; top:20px; width:8px; height:8px; border-radius:50%}
+@media (max-width:820px){.stages{grid-template-columns:1fr} .phase-head{grid-template-columns:1fr; gap:10px; align-items:start}}
+
+.skills{background:var(--bg-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  margin-top:clamp(56px,7vw,96px); padding:clamp(44px,6vw,80px) 0}
+.skill-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:34px}
+.skill{background:var(--bg-2); padding:22px; display:flex; flex-direction:column; gap:8px}
+.skill h3{font-size:16px; font-weight:600}
+.skill p{margin:0; font-size:14px; color:var(--fg-2); line-height:1.5}
+.skill .tools{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-top:auto; padding-top:12px}
+@media (max-width:900px){.skill-grid{grid-template-columns:1fr}}
+
+.note{border:1px solid var(--line); border-left:2px solid var(--cold); background:var(--bg-2);
+  padding:18px 20px; margin:30px 0; font-size:15px; color:var(--fg-2); line-height:1.55}
+.note b{color:var(--fg)}
+
+.cta{padding:clamp(48px,6vw,90px) 0; text-align:center}
+.cta h2{font-size:clamp(24px,3.2vw,40px); max-width:20ch; margin-inline:auto}
+.cta p{color:var(--fg-2); margin:18px auto 28px; max-width:52ch}
+footer{border-top:1px solid var(--line); padding:28px 0 40px; color:var(--muted)}
+.foot{display:flex; gap:20px; flex-wrap:wrap; justify-content:space-between}
+
+[data-r]{opacity:0; transform:translateY(14px); transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1)}
+[data-r].in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){[data-r]{opacity:1; transform:none}}
+</style>
+</head>
+<body>
+
+<header><div class="shell head-in">
+  <a class="back" href="index.html">← Инженерная студия Дмитрия Клевцова</a>
+  <a class="btn" href="index.html#brief">Поставить задачу</a>
+</div></header>
+
+<main></main>
+
+<footer><div class="shell foot">
+  <span class="mono">© <span id="y"></span> · Инженерная студия Дмитрия Клевцова</span>
+  <a class="mono" href="privacy.html">Политика обработки данных</a>
+</div></footer>
+
+<script id="stages-app">
+/* =============================================================
+   СТАДИИ ПРОЕКТА
+   Данные — из методологии студии. Тип стадии показывает,
+   кто её выполняет: студия, партнёр или это договорная точка.
+   ============================================================= */
+const STAGES = {
+  intro: {
+    kicker: "Методология",
+    title: "Как идёт инженерный проект — 30 стадий в 7 фазах",
+    lead: "Это полная карта работ — от первого разговора до гарантийного сопровождения. В конкретном проекте берутся не все стадии: объём собирается под задачу и бюджет. Карта нужна, чтобы заказчик заранее видел, из чего состоит работа, где точки согласования и на чём проекты обычно ломаются.",
+    note: "<b>Не каждый проект проходит все 30 стадий.</b> Комплект КД на узел — это фазы 0–2 и несколько дней работы. Разработка оборудования под ключ с изготовлением и пусконаладкой — вся карта целиком. На старте мы честно говорим, какие стадии нужны именно вам, а какие можно пропустить без риска."
+  },
+  legend: [
+    { k:"own",     t:"Выполняем сами" },
+    { k:"partner", t:"Организуем через партнёра" },
+    { k:"doc",     t:"Договорная точка" },
+    { k:"big",     t:"Только для крупных проектов" }
+  ],
+  phases: [
+    {
+      n:"Фаза 0", t:"Предпроектная и контрактация", logic:"Превращаем разговор в сделку с понятными рисками для обеих сторон.",
+      stages:[
+        { n:"01", t:"Бриф", type:"own", focus:"Разбираемся в бизнес-задаче, а не в техническом запросе. Важно, что должно измениться у вас, а не какую деталь начертить.", out:"Бриф-документ на 1–2 страницы, подписанный заказчиком" },
+        { n:"02", t:"Договор на предпроектные работы", type:"doc", focus:"Первая интеллектуальная работа — аудит, патентная проверка, ТЗ — выполняется по договору с чётким объёмом и сроком по каждому пункту.", out:"Договор с разделением по работам — аудит N дней, патенты — N дней, ТЗ — N дней" }
+      ],
+      gate:{ n:"Gate 0", t:"Бриф подписан, бюджетные ожидания подтверждены" }
+    },
+    {
+      n:"Фаза 1", t:"Диагностика и базовые исследования", logic:"Собираем факты, а не мнения. Здесь дешевле всего отказаться от неверного пути.",
+      stages:[
+        { n:"03", t:"Аудит существующих решений", type:"own", focus:"Журналы поломок, логи отказов, фотографии дефектов, стоимость владения. Плюс бенчмаркинг — как эту функцию решают в смежных отраслях.", out:"Отчёт с 3–5 ключевыми проблемами и оценкой ущерба" },
+        { n:"04", t:"Проверка на патентные риски", type:"own", focus:"Поиск по классам МПК в базах Роспатента, WIPO, USPTO, EPO — в зависимости от рынка сбыта. Карта рисков показывает, где красная зона, а где свободная.", out:"Отчёт о патентной чистоте, базовый уровень" },
+        { n:"05", t:"Техническое задание", type:"own", focus:"Перевод бизнес-требований в измеримые технические параметры. Каждое требование — цифра, допуск или стандарт. Отдельно фиксируются критерии приёмки.", out:"ТЗ v1.0 с подписью заказчика" },
+        { n:"06", t:"Первичная оценка масштаба", type:"own", focus:"Трудозатраты, сроки по трём сценариям, целевая себестоимость изделия. Решение go / no-go. Если бюджет ниже себестоимости или нет экспертизы — говорим прямо.", out:"Внутренняя записка по профилю проекта" },
+        { n:"07", t:"Договор на инжиниринг", type:"doc", focus:"Фиксируем бюджет этапа разработки. Явно прописывается, что входит в КД и что не входит, изменения ТЗ оплачиваются отдельно.", out:"Договор на разработку конструкторской документации" }
+      ],
+      gate:{ n:"Gate 1", t:"ТЗ подписано — требования заморожены" }
+    },
+    {
+      n:"Фаза 2", t:"Проектирование и разработка", logic:"Материализация требований — сначала в цифре, потом в пластике, и только потом в металле.",
+      stages:[
+        { n:"08", t:"Концепт", type:"own", focus:"Два-три принципиально разных варианта исполнения без перфекционизма. Сравнение по стоимости изготовления, надёжности, технологичности и срокам.", out:"Эскизы и матрица выбора концепции" },
+        { n:"8.1", t:"3D-модель ключевых узлов", type:"own", focus:"Проверка принципа действия до детализации — кинематика, схема зажима, траектории. Точка proof of concept — если узел не работает в цифре, в металле он не заработает.", out:"Упрощённая 3D-сцена и видео работы механизма" },
+        { n:"09", t:"Печать макетов узлов", type:"partner", focus:"Спорные узлы печатаются на 3D-принтере в масштабе. Проверяется собираемость, доступ инструмента, удобство оператора.", out:"Фото и видео макета, акт макетирования" },
+        { n:"10", t:"Согласование узлов", type:"own", focus:"Показываем результаты макетирования и обновляем ТЗ с учётом выявленных ограничений. Дальше требования замораживаются.", out:"ТЗ v2.0 и лист регистрации изменений" },
+        { n:"11", t:"Полная 3D-модель", type:"own", focus:"Детальное моделирование всех компонентов с материалами, массами и центрами тяжести. Модель строится параметрически — её можно менять, а не перерисовывать.", out:"Цифровой макет изделия" },
+        { n:"12", t:"Силовой расчёт", type:"own", focus:"Расчёт статической прочности, усталости, вибраций. Проверяются граничные условия — корректно ли закреплена модель, реалистичны ли нагрузки.", out:"Отчёт с эпюрами напряжений и коэффициентом запаса 1,5–2,0" },
+        { n:"13", t:"Натурный макет", type:"partner", focus:"Макет из простых материалов в масштабе, примерка на площадке к существующим коммуникациям. «Не поворачивает в пролёте» и «не проходит в дверь» должны выясниться здесь.", out:"Акт примерки, фотографии на объекте" },
+        { n:"14", t:"Конструкторская документация", type:"own", focus:"Спецификация, чертежи деталей с допусками и покрытиями, сборочные чертежи со взрыв-схемами для сервиса, схемы подключения.", out:"Полный комплект КД, прошедший нормоконтроль" },
+        { n:"15", t:"Спецификация закупки (BOM)", type:"own", focus:"Иерархическая структура изделия с артикулами, ГОСТами и допустимыми заменами. Расхождение BOM с чертежом — гарантированный хаос на закупке.", out:"BOM в формате, пригодном для закупки и планирования" },
+        { n:"16", t:"Файлы для ЧПУ", type:"own", focus:"Плоские развёртки на лазерную и плазменную резку. Контроль масштаба, замкнутости контуров, зеркальности и припусков под гибку.", out:"Библиотека DXF/DWG для производства" }
+      ],
+      gate:{ n:"Gate 2 · Gate 3", t:"Концепт подтверждён макетом · КД и BOM готовы — разрешён расход на закупку" }
+    },
+    {
+      n:"Фаза 3", t:"Закупки и комплектация", logic:"Превращаем бюджет в комплектующие, не теряя качества.",
+      stages:[
+        { n:"17", t:"Договор на снабжение", type:"doc", focus:"Анализ рынка и поиск поставщиков — отдельная работа. Она не смешивается с закупкой, если риск поставки не берётся на себя.", out:"Договор на услуги по анализу рынка" },
+        { n:"18", t:"Анализ цен и поставщиков", type:"own", focus:"Работа по прайс-листам производителей и тендер среди альтернатив, включая импортозамещение. Сравнение по цене, сроку, сертификатам и гарантии.", out:"Сводная таблица предложений с рекомендацией" },
+        { n:"19", t:"Договор на изготовление", type:"doc", focus:"Развилка — единый договор под ключ или отдельные договоры на закупку, сборку и логистику. От этого зависит, кто несёт риски поставщиков.", out:"Схема договоров под выбранный сценарий" },
+        { n:"20", t:"Размещение заказа", type:"partner", focus:"Передача чертежей, BOM и технических условий изготовителю. В договоре разграничивается ответственность, ведь дефекты конструкции и дефекты изготовления — разные зоны.", out:"Размещённые заказы с датами поставки" },
+        { n:"21", t:"Шеф-контроль закупки", type:"partner", focus:"Выезд инженера на производство или удалённый контроль по фото и видео — геометрия первой детали, материалы, покрытия.", out:"Акт приёмки компонентов" },
+        { n:"22", t:"Сопровождение тендера", type:"big", focus:"Подготовка тендерной документации, экспертиза предложений участников, участие в переговорах на стороне заказчика.", out:"Таблица сравнения участников и рекомендация" }
+      ]
+    },
+    {
+      n:"Фаза 4", t:"Производство, сборка, испытания", logic:"Собираем и проверяем. Разработчик присутствует там, где принимаются решения по факту.",
+      stages:[
+        { n:"23", t:"Логистика и таможня", type:"big", focus:"Контроль упаковки и консервации, оформление документов на импортные компоненты. В график закладывается буфер на таможенные процедуры.", out:"Комплект товаросопроводительных документов" },
+        { n:"24", t:"Сборка", type:"partner", focus:"Подготовка оснастки и рабочего места, поузловая сборка с промежуточным контролем по технологическим картам.", out:"Собранное изделие с промежуточными протоколами" },
+        { n:"25", t:"Шеф-контроль сборки", type:"own", focus:"Разработчик на сборке принимает решения по факту — где допустимо отклонение, где сверлить по месту, что уходит в брак. Каждое изменение фиксируется.", out:"Лист изменений КД, исполнение 2" }
+      ]
+    },
+    {
+      n:"Фаза 5", t:"Финализация и сдача", logic:"Закрываем контракт так, чтобы изделие можно было законно и безопасно эксплуатировать.",
+      stages:[
+        { n:"26", t:"Эксплуатационные документы", type:"own", focus:"Руководство по эксплуатации и паспорт изделия с регламентами обслуживания, смазочными картами и схемами подключения.", out:"РЭ и паспорт со штампом нормоконтроля" },
+        { n:"27", t:"Доставка на объект", type:"partner", focus:"Схема строповки, маркировка центра тяжести, контроль загрузки и крепления при перевозке.", out:"Изделие на площадке заказчика без повреждений" },
+        { n:"28", t:"Пусконаладка и сдача", type:"own", focus:"Выполнение программы и методики испытаний, измерение заявленных параметров, приёмка по критериям из ТЗ.", out:"Подписанный акт сдачи-приёмки — точка старта гарантии" }
+      ],
+      gate:{ n:"Gate 4", t:"Акт сдачи-приёмки подписан — проект завершён" }
+    },
+    {
+      n:"Фаза 6", t:"После сдачи", logic:"Результат проекта капитализируется — изделие защищается патентом, а замечания идут в следующую версию.",
+      stages:[
+        { n:"29", t:"Оформление патента", type:"partner", focus:"Совместная работа с патентным поверенным — формула, описание, чертежи. Заявка подаётся до публичной демонстрации изделия.", out:"Заявка в ФИПС на техническое решение" },
+        { n:"30", t:"Гарантийное сопровождение", type:"own", focus:"Регламент обработки обращений, разбор гарантийных случаев как входные данные для следующей версии изделия.", out:"Работающее изделие и понятная зона ответственности" }
+      ]
+    }
+  ],
+  skills: {
+    title: "Что за этим стоит",
+    lead: "Стадии — это внешняя сторона. Внутри каждой лежит конкретная инженерная работа, инструменты и нормативы.",
+    items: [
+      { t:"Инженерный анализ", d:"Разбор отказов по журналам и логам, оценка стоимости владения, бенчмаркинг решений из смежных отраслей.", tools:"Аудит · отказы · экономика эксплуатации" },
+      { t:"Патентная чистота", d:"Поиск по классам МПК, карта рисков с зонами обхода. Работа с патентным поверенным там, где нужен юридический вес.", tools:"Роспатент · WIPO · USPTO · EPO" },
+      { t:"3D-моделирование", d:"Параметрические сборки с материалами и масс-инерционными характеристиками, проверка на столкновения и интерференции.", tools:"SolidWorks · Inventor · Fusion" },
+      { t:"Прочностные расчёты", d:"Статика, усталость, вибрации. Контроль граничных условий и коэффициент запаса, а не расчёт «на глаз».", tools:"FEA · запас 1,5–2,0" },
+      { t:"Конструкторская документация", d:"Чертежи с допусками, посадками, шероховатостью и покрытиями. Спецификации, взрыв-схемы для сервиса, нормоконтроль.", tools:"ЕСКД · нормоконтроль · DFM" },
+      { t:"Подготовка производства", d:"BOM с артикулами и допустимыми заменами, развёртки под лазер с контролем припусков на гибку.", tools:"BOM · DXF · раскрой" },
+      { t:"Reverse engineering", d:"3D-сканирование существующего объекта, восстановление геометрии, параметрическая модель и документация для повтора.", tools:"Скан · облако точек · модель" },
+      { t:"Контроль изготовления", d:"Приёмка первой детали, проверка геометрии, материалов и покрытий. Присутствие разработчика на сборке.", tools:"Шеф-контроль · протоколы" },
+      { t:"Сдача и эксплуатация", d:"Программа и методика испытаний, руководство по эксплуатации, паспорт изделия, регламенты обслуживания.", tools:"ПМИ · РЭ · паспорт" }
+    ]
+  },
+  cta: {
+    title: "Не уверены, какие стадии нужны вашей задаче?",
+    lead: "Опишите задачу — разберём, что действительно требуется, а что можно пропустить без риска для результата."
+  }
+};
+
+/* --------- рендер --------- */
+const M = document.querySelector('main');
+const I = STAGES.intro;
+const stageCard = s => `
+  <article class="stage">
+    <span class="mark d-${s.type}"></span>
+    <div class="top"><span class="n">${s.n}</span><h3>${s.t}</h3></div>
+    <p class="focus">${s.focus}</p>
+    <p class="out"><b>Результат:</b> ${s.out}</p>
+  </article>`;
+
+M.innerHTML = `
+<section class="intro"><div class="shell">
+  <div class="kicker mono" data-r><span class="idx">01</span><span class="bar"></span><span>${I.kicker}</span></div>
+  <h1 data-r>${I.title}</h1>
+  <p class="lead" data-r>${I.lead}</p>
+  <div class="legend" data-r>
+    ${STAGES.legend.map(l=>`<span class="lg"><span class="dot d-${l.k}"></span>${l.t}</span>`).join('')}
+  </div>
+  <div class="note" data-r>${I.note}</div>
+</div></section>
+
+<div class="shell">
+  ${STAGES.phases.map(p=>`
+    <section class="phase" data-r>
+      <div class="phase-head">
+        <div><div class="kicker mono"><span class="idx">${p.n}</span><span class="bar"></span></div><h2>${p.t}</h2></div>
+        <p>${p.logic}</p>
+      </div>
+      <div class="stages">${p.stages.map(stageCard).join('')}</div>
+      ${p.gate ? `<div class="gate"><b>${p.gate.n}</b><span>${p.gate.t}</span></div>` : ''}
+    </section>`).join('')}
+</div>
+
+<section class="skills"><div class="shell">
+  <div class="kicker mono" data-r><span class="idx">02</span><span class="bar"></span><span>Компетенции</span></div>
+  <h2 style="font-size:clamp(24px,3.2vw,40px)" data-r>${STAGES.skills.title}</h2>
+  <p class="lead" data-r>${STAGES.skills.lead}</p>
+  <div class="skill-grid">
+    ${STAGES.skills.items.map(s=>`
+      <article class="skill" data-r><h3>${s.t}</h3><p>${s.d}</p><div class="tools">${s.tools}</div></article>`).join('')}
+  </div>
+</div></section>
+
+<section class="cta"><div class="shell">
+  <h2 data-r>${STAGES.cta.title}</h2>
+  <p data-r>${STAGES.cta.lead}</p>
+  <a class="btn" href="index.html#brief" data-r>Описать задачу</a>
+</div></section>`;
+
+document.getElementById('y').textContent = new Date().getFullYear();
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),
+  {threshold:.1, rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('[data-r]').forEach(el=>io.observe(el));
+
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /models/
+Disallow: /vendor/
+
+Sitemap: https://klevtsov-engineering.ru/sitemap.xml
